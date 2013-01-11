@@ -125,6 +125,8 @@ for T = 2:t
     xlim([1 Length+1]);
     ylim([1 Length+1]);
     
+
+    
     pause(.0005)
 end
 hold off
