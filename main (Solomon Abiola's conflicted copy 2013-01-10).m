@@ -45,6 +45,9 @@ for T = 2:t
     
     for i = 1:N
         
+        % Shrink the matrix to only those who are infected to check over
+        %O(sum((O==0),2)>0,:) = [];      
+        
         % Random Walker movement
         % Create two vectors
         rx  = [M(i,1)-1,M(i,1),M(i,1)+1];
@@ -58,7 +61,7 @@ for T = 2:t
             pairs = [px(:) py(:)];
             for j = 1:N
                 % Check for which users are in cells near the main user
-                Z = ismembc(M(:,1:2),pairs);
+                Z = ismember(M(:,1:2),pairs);
                 
                 % You can't infect yourself so set that to 0,0
                 Z(i,:) = [0,0];
@@ -74,7 +77,7 @@ for T = 2:t
             pairs = [px(:) py(:)];
             for j = 1:N
                 % Check for which users are in cells near the main user
-                Z = ismembc(M(:,1:2),pairs);
+                Z = ismember(M(:,1:2),pairs);
                 
                 % You can't infect yourself so set that to 0,0
                 Z(i,:) = [0,0];
@@ -89,17 +92,17 @@ for T = 2:t
             pairs = [px(:) py(:)];
             for j = 1:N
                 % Check for which users are in cells near the main user
-                Z = ismembc(M(:,1:2),pairs);
+                Z = ismember(M(:,1:2),pairs);
                 
                 % You can't infect yourself so set that to 0,0
                 Z(i,:) = [0,0];
                 
                 % Compute if they can infect that user
-                %a*b'
-                I(i) = (I(i) + (sum(diag((Z(:,1)*Z(:,2)'))*rand() > M(i,3)) > 0)) > 0;
-                %I(i) = (I(i) + (sum(sum((Z(:,1).*Z(:,2)),2)*rand() > M(i,3)) > 0)) > 0;
+                I(i) = (I(i) + (sum(sum((Z(:,1).*Z(:,2)),2)*rand() > M(i,3)) > 0)) > 0;
             end
         end
+        
+        
         
         M(i,5) = rx(randv(1)); % Store new random x point
         M(i,6) = ry(randv(2)); % Store new random y point
@@ -115,7 +118,7 @@ for T = 2:t
     scatter(M(:,1),M(:,2),50,M(:,4),'filled');
     xlim([0 Length]);
     ylim([0 Length]);
-    pause(.0005)
+    pause(.00005)
     
     
 end
