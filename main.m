@@ -56,7 +56,6 @@ for T = 2:t
             % Generate all possible combinations
             [px,py] = meshgrid(rx(2:3), ry(2:3));
             pairs = [px(:) py(:)];
-            for j = 1:N
                 % Check for which users are in cells near the main user
                 Z = ismembc(M(:,1:2),pairs);
                 
@@ -65,14 +64,13 @@ for T = 2:t
                 
                 % Compute if they can infect that user
                 I(i) = (I(i) + (sum(sum((Z(:,1).*Z(:,2)),2)*rand() > M(i,3)) > 0)) > 0;
-            end
+            
             
         elseif ((M(i,1)+1 > Length) || (M(i,2)-1 > Length))
             randv = randi(2,1,2);
             % Generate all possible combinations
             [px,py] = meshgrid(rx(1:2), ry(1:2));
             pairs = [px(:) py(:)];
-            for j = 1:N
                 % Check for which users are in cells near the main user
                 Z = ismembc(M(:,1:2),pairs);
                 
@@ -81,13 +79,12 @@ for T = 2:t
                 
                 % Compute if they can infect that user
                 I(i) = (I(i) + (sum(sum((Z(:,1).*Z(:,2)),2)*rand() > M(i,3)) > 0)) > 0;
-            end
+            
         else
             randv = randi(3,1,2);
             % Generate all possible combinations
             [px,py] = meshgrid(rx(1:3), ry(1:3));
             pairs = [px(:) py(:)];
-            for j = 1:N
                 % Check for which users are in cells near the main user
                 Z = ismembc(M(:,1:2),pairs);
                 
@@ -96,9 +93,9 @@ for T = 2:t
                 
                 % Compute if they can infect that user
                 %a*b'
-                I(i) = (I(i) + (sum(diag((Z(:,1)*Z(:,2)'))*rand() > M(i,3)) > 0)) > 0;
-                %I(i) = (I(i) + (sum(sum((Z(:,1).*Z(:,2)),2)*rand() > M(i,3)) > 0)) > 0;
-            end
+                %I(i) = (I(i) + (sum(diag((Z(:,1)*Z(:,2)'))*rand() > M(i,3)) > 0)) > 0;
+                I(i) = (I(i) + (sum(sum((Z(:,1).*Z(:,2)),2)*rand() > M(i,3)) > 0)) > 0;
+            
         end
         
         M(i,5) = rx(randv(1)); % Store new random x point
