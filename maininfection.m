@@ -1,5 +1,5 @@
 % Generate random
-function [] = mainzombie(N,T,Length,infected)
+function [] = maininfection(N,T,Length,infected)
 % N is number of persons
 % t is time t to run
 % Len in arbitrary units
@@ -35,7 +35,7 @@ for i = 1:N
 end
 
 for t = 1:T
-    parfor i = 1:length(M(:,1))
+    for i = 1:length(M(:,1))
         % Random Walker movement
         % Create two vectors
         
@@ -155,17 +155,17 @@ for t = 1:T
     pause(.0005)
     % Create new ammo and food at random places
     % Generate food matrix
-    F = zeros(N,2);
-    
-    % Generate ammo matrix
-    A = zeros(N,2);
-    for j = 1:N
-        F(j,1) = randi(Length,1,1); % random initial x
-        F(j,2) = randi(Length,1,1); % random initial y
-        
-        A(j,1) = randi(Length,1,1); % random initial x
-        A(j,2) = randi(Length,1,1); % random initial y
-    end
+%     F = zeros(N,2);
+%     
+%     % Generate ammo matrix
+%     A = zeros(N,2);
+%     for j = 1:N
+%         F(j,1) = randi(Length,1,1); % random initial x
+%         F(j,2) = randi(Length,1,1); % random initial y
+%         
+%         A(j,1) = randi(Length,1,1); % random initial x
+%         A(j,2) = randi(Length,1,1); % random initial y
+%     end
     
         % Remove the dead people
     M(any(M(:,8)<0,2),:)=[];

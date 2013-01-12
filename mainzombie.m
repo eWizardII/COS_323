@@ -30,7 +30,7 @@ for i = 1:N
     
 
     M(i,4) = rand() <= infected; % is the user infected or not ( 0 - Not Infected, 1 - Infected)
-    M(i,3) = 10000 * M(i,4);                 % initial ammo 9 rounds    
+    M(i,3) = 9 * M(i,4);                 % initial ammo 9 rounds    
     M(i,7) = 1 * M(i,4);       % user health 10 is for a single user * whether they are infected or not
 end
 
@@ -155,17 +155,17 @@ for t = 1:T
     pause(.0005)
     % Create new ammo and food at random places
     % Generate food matrix
-    F = zeros(N,2);
-    
-    % Generate ammo matrix
-    A = zeros(N,2);
-    for j = 1:N
-        F(j,1) = randi(Length,1,1); % random initial x
-        F(j,2) = randi(Length,1,1); % random initial y
-        
-        A(j,1) = randi(Length,1,1); % random initial x
-        A(j,2) = randi(Length,1,1); % random initial y
-    end
+%     F = zeros(N,2);
+%     
+%     % Generate ammo matrix
+%     A = zeros(N,2);
+%     for j = 1:N
+%         F(j,1) = randi(Length,1,1); % random initial x
+%         F(j,2) = randi(Length,1,1); % random initial y
+%         
+%         A(j,1) = randi(Length,1,1); % random initial x
+%         A(j,2) = randi(Length,1,1); % random initial y
+%     end
     
         % Remove the dead people
     M(any(M(:,8)<0,2),:)=[];
