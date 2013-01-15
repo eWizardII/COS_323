@@ -2,7 +2,7 @@
 % attack situation
 % Princeton COS323
 % Final Project
-function [Su,Zo,S] = mainzombie(N,T,Length,infected,ammo,randoammo,grapheron)
+function [Su,Zo,S,Sui,Zoi] = mainzombie(N,T,Length,infected,ammo,randoammo,grapheron)
 % N is number of persons
 % t is time t to run in arbitrary units
 % Length in arbitrary units
@@ -32,7 +32,7 @@ for i = 1:N
     M(i,1) = randi(Length,1,1);     % random initial x
     M(i,2) = randi(Length,1,1);     % random initial y
     
-    % Make the probability of infection normally distirbuted
+    % Make the probability of infection normally distributed
     dist0 = rand();
     if dist0 > .843
         M(i,4) = randn() <= infected;
@@ -101,4 +101,8 @@ end
 % Return the number that survived and the number that died
 Su = S(t,1);
 Zo = S(t,2);
+
+% Return back intial starting conditions
+Sui = S(1,1);
+Zoi = S(1,2);
 end

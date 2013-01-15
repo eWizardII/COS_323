@@ -1,4 +1,4 @@
-function [] = grapher(M,H,T,N,PredS,PredI,Length,S,t)
+function [] = grapher(M,H,T,N,Sm,Im,Length,S,t)
 % This function graphs in real time the dynamics of the system
 subplot(2,2,1);
 gscatter(M(:,1),M(:,2),M(:,7),'bgrcmyk','.',5,'on','x (arbitrary length units)','y (arbitrary length units)');
@@ -16,8 +16,8 @@ subplot(2,2,2);
 plot(S(:,1),'g');
 hold on
 plot(S(:,2),'r');
-plot(PredS,'b--')
-plot(PredI,'m--')
+plot(Sm,'b--')
+plot(Im,'m--')
 
 % Only draw the legend once so as to not waste time redrawing it
 if t == 1

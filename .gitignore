@@ -124,6 +124,8 @@ UpgradeLog*.XML
 Thumbs.db
 *.doc
 *.docx
+*.asv
+*.dropbox
 
 # Folder config file
 Desktop.ini
