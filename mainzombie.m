@@ -2,7 +2,7 @@
 % attack situation
 % Princeton COS323
 % Final Project
-function [Su,Zo,S] = mainzombie(N,T,Length,infected,ammo,randoammo)
+function [Su,Zo,S] = mainzombie(N,T,Length,infected,ammo,randoammo,grapheron)
 % N is number of persons
 % t is time t to run in arbitrary units
 % Length in arbitrary units
@@ -12,8 +12,10 @@ function [Su,Zo,S] = mainzombie(N,T,Length,infected,ammo,randoammo)
 % each user up to the limit set by ammo
 
 % Enlarge the display screen
+if grapheron == 1
 h=figure;
 set(h,'Position',[1 1 1920 1080]);
+end
 
 % Generate persons matrix
 M = zeros(N,8);
@@ -83,14 +85,18 @@ for t = 1:T
     S(t,3) = sum(M(:,3));
     
     % Plot results
+    if grapheron == 1
     grapher(M,H,T,N,Sur,Zom,Length,S,t);
+    end
     
     % Remove the dead people
     M(any(M(:,8)<0,2),:)=[];
 end
 hold on;
 % Grab the vaules from GN solver for graphing
+if grapheron == 1
 gsfun(S);
+end
 
 % Return the number that survived and the number that died
 Su = S(t,1);
