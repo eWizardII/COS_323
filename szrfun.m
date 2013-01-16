@@ -1,3 +1,7 @@
+% Princeton COS323
+% Final Project
+% Author: Solomon (sabiola), Daniel (dyeboah), Brandon (brhodes)
+% SZR Model
 function [Stat] = szrfun(~,initial,beta,zeta,alpha,N)
  
 % This function creates the SZR model differential equations to be solved

@@ -1,20 +1,24 @@
+% Princeton COS323
+% Final Project
+% Author: Solomon (sabiola), Daniel (dyeboah), Brandon (brhodes)
+% Determine the movements and infection of users
 function [M,H] = userfun(i,M,Length,H)
-% Controls the behavior of the users but zombie and non-zombie
+% Controls the behavior of the users both zombie and non-zombie
 % Random Walker movement
 % Create two vectors
 rx  = [M(i,1)-1,M(i,1),M(i,1)+1];
 ry  = [M(i,2)-1,M(i,2),M(i,2)+1];
-
-% Create the non extreme conditions that is make sure that the people are
+ 
+% Create the non-extreme conditions that is make sure that the people are
 % defined in the space in which we want them to move eliminate
 % possibilities that would send them outside of the box or something weird
 rx  = rx((rx >= 0) & (rx <= Length));
 ry  = ry((ry >= 0) & (ry <= Length));
-
+ 
 % Create all the possible permutations that they can move across
 [px,py] = meshgrid(rx, ry);
 pairs = [px(:) py(:)];
-
+ 
 % Randomly select a movement to take by selecting across a normal
 % distribution due to the fact that the rand function is not non-uniform
 % thus by adding this distribution we have added drift to our simulation
@@ -26,10 +30,10 @@ elseif dist1 < .115
 else
     rm = randi(length(pairs),1);
 end
-
+ 
 M(i,5) = pairs(rm,1); % Store new random x point
 M(i,6) = pairs(rm,2); % Store new random y point
-
+ 
 if M(i,4) == 0
     % You're a zombie free ride
     M(i,7) = 0;
@@ -42,7 +46,7 @@ else
     
     % Are there zombies near the user
     zombieprob = sum(((Z(:,1) + Z(:,2) == 2) & (M(:,4) == 0)));
-
+ 
     % Compute if they can infect that user
     M(i,3) = (M(i,3) - zombieprob);
     
@@ -72,4 +76,3 @@ else
     end
 end
 end
-
